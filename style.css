@@ -84,6 +84,7 @@ ul {
 
 img {
     max-width: 100%;
+    height: auto;
     display: block;
 }
 
@@ -136,16 +137,15 @@ img {
     transition: var(--transition-fast);
 }
 
-.logo-icon {
-    width: 36px;
-    height: 36px;
-    color: var(--purple-primary);
+.logo-img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
     transition: var(--transition-base);
 }
 
-.nav-logo:hover .logo-icon {
-    transform: rotate(15deg);
-    color: var(--purple-dark);
+.nav-logo:hover .logo-img {
+    transform: rotate(8deg) scale(1.05);
 }
 
 .logo-text {
@@ -1078,6 +1078,189 @@ img {
 }
 
 /* ========================================
+   CLIENTS SECTION — CAROUSEL
+   ======================================== */
+
+.clients {
+    padding: var(--section-padding) 0;
+    background: var(--bg-alt);
+    position: relative;
+}
+
+/* Carousel Container */
+.clients-carousel {
+    position: relative;
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+.carousel-viewport {
+    overflow: hidden;
+    border-radius: var(--radius-lg);
+    padding: 8px 0;
+}
+
+.carousel-track {
+    display: flex;
+    gap: 20px;
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: transform;
+}
+
+/* Client Cards — Fundo Roxo Escuro */
+.client-card {
+    background: #1a0a2e;
+    border: 1px solid rgba(113, 48, 230, 0.25);
+    border-radius: var(--radius-lg);
+    padding: 32px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 180px;
+    min-width: 220px;
+    flex: 0 0 calc(25% - 15px);
+    transition: var(--transition-base);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+    position: relative;
+    overflow: hidden;
+}
+
+.client-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--purple-primary), transparent);
+    opacity: 0;
+    transition: var(--transition-base);
+}
+
+.client-card:hover {
+    border-color: var(--purple-primary);
+    transform: translateY(-6px);
+    box-shadow: 0 16px 48px rgba(113, 48, 230, 0.25);
+}
+
+.client-card:hover::before {
+    opacity: 1;
+}
+
+.client-logo-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+.client-logo-wrap img {
+    max-width: 100%;
+    max-height: 110px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    filter: brightness(0.85) opacity(0.95);
+    transition: var(--transition-base);
+}
+
+.client-card:hover .client-logo-wrap img {
+    filter: brightness(1.15) opacity(1);
+}
+
+/* Logo Daniela Vianello — destaque ampliado */
+.logo-daniela img {
+    transform: scale(2.4);
+    filter: brightness(0.95) opacity(1);
+    max-height: 160px;
+}
+
+.client-card:hover .logo-daniela img {
+    transform: scale(2.6);
+    filter: brightness(1.25) opacity(1);
+}
+
+/* Carousel Buttons */
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-card);
+    border: 1px solid var(--border-light);
+    border-radius: 50%;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: var(--transition-base);
+    z-index: 10;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+.carousel-btn:hover {
+    background: var(--purple-primary);
+    border-color: var(--purple-primary);
+    color: var(--text-inverse);
+    transform: translateY(-50%) scale(1.08);
+    box-shadow: 0 8px 24px rgba(113, 48, 230, 0.3);
+}
+
+.carousel-btn:active {
+    transform: translateY(-50%) scale(0.96);
+}
+
+.carousel-btn:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+    background: var(--bg-card);
+    border-color: var(--border-light);
+    color: var(--text-muted);
+    transform: translateY(-50%);
+    box-shadow: none;
+}
+
+.carousel-prev {
+    left: -24px;
+}
+
+.carousel-next {
+    right: -24px;
+}
+
+/* Carousel Dots */
+.carousel-dots {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 32px;
+}
+
+.carousel-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--border-medium);
+    border: none;
+    cursor: pointer;
+    transition: var(--transition-base);
+    padding: 0;
+}
+
+.carousel-dot.active {
+    background: var(--purple-primary);
+    transform: scale(1.2);
+    box-shadow: 0 0 0 4px rgba(113, 48, 230, 0.15);
+}
+
+.carousel-dot:hover {
+    background: var(--purple-light);
+}
+
+/* ========================================
    CTA SECTION
    ======================================== */
 
@@ -1184,10 +1367,15 @@ img {
     margin-bottom: 16px;
 }
 
-.footer-logo svg {
-    width: 32px;
-    height: 32px;
-    color: var(--purple-primary);
+.footer-logo-img {
+    width: 36px;
+    height: 36px;
+    object-fit: contain;
+    transition: var(--transition-base);
+}
+
+.footer-logo:hover .footer-logo-img {
+    transform: rotate(8deg) scale(1.05);
 }
 
 .footer-tagline {
@@ -1481,6 +1669,21 @@ img {
     .timeline-line {
         left: 24px;
     }
+
+    /* Carousel: 3 cards no tablet */
+    .client-card {
+        flex: 0 0 calc(33.333% - 14px);
+        min-width: 180px;
+        min-height: 140px;
+    }
+
+    .carousel-prev {
+        left: -12px;
+    }
+
+    .carousel-next {
+        right: -12px;
+    }
 }
 
 @media (max-width: 768px) {
@@ -1581,6 +1784,39 @@ img {
     .lead-form-wrapper {
         padding: 0 8px;
     }
+
+    /* Carousel: 2 cards no mobile */
+    .client-card {
+        flex: 0 0 calc(50% - 10px);
+        min-width: 140px;
+        min-height: 120px;
+        padding: 24px 16px;
+    }
+
+    .client-logo-wrap img {
+        max-height: 80px;
+    }
+
+    .carousel-prev {
+        left: -8px;
+        width: 40px;
+        height: 40px;
+    }
+
+    .carousel-next {
+        right: -8px;
+        width: 40px;
+        height: 40px;
+    }
+
+    .logo-daniela img {
+        transform: scale(2.0);
+        max-height: 120px;
+    }
+
+    .client-card:hover .logo-daniela img {
+        transform: scale(2.2);
+    }
 }
 
 @media (max-width: 480px) {
@@ -1610,6 +1846,36 @@ img {
     .diff-item {
         padding: 16px;
     }
+
+    /* Carousel: 1 card no mobile pequeno */
+    .client-card {
+        flex: 0 0 100%;
+        min-width: auto;
+        min-height: 140px;
+    }
+
+    .carousel-prev,
+    .carousel-next {
+        display: none;
+    }
+
+    .logo-daniela img {
+        transform: scale(1.8);
+        max-height: 100px;
+    }
+
+    .client-card:hover .logo-daniela img {
+        transform: scale(2.0);
+    }
+
+    .logo-img {
+        width: 36px;
+        height: 36px;
+    }
+
+    .nav-logo .logo-text {
+        font-size: 1.25rem;
+    }
 }
 
 /* ========================================
@@ -1632,6 +1898,10 @@ img {
 
     html {
         scroll-behavior: auto;
+    }
+
+    .carousel-track {
+        transition: none;
     }
 }
 

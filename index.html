@@ -18,12 +18,7 @@
     <nav class="navbar" id="navbar">
         <div class="nav-container">
             <a href="#" class="nav-logo">
-                <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" class="logo-icon">
-                    <circle cx="100" cy="100" r="85" stroke="currentColor" stroke-width="14" fill="none"/>
-                    <circle cx="100" cy="100" r="50" stroke="currentColor" stroke-width="14" fill="none"/>
-                    <path d="M100 15 L100 100 M55 100 L145 100" stroke="currentColor" stroke-width="14" stroke-linecap="round"/>
-                    <path d="M100 50 Q140 50 155 85" stroke="currentColor" stroke-width="14" stroke-linecap="round" fill="none"/>
-                </svg>
+                <img src="img/logo_elabore_roxo.png" alt="Grupo Elabore" class="logo-img" width="48" height="48">
                 <span class="logo-text">elabore</span>
             </a>
             <button class="nav-toggle" id="navToggle" aria-label="Menu">
@@ -36,6 +31,7 @@
                 <li><a href="#servicos" class="nav-link">Serviços</a></li>
                 <li><a href="#metodologia" class="nav-link">Metodologia</a></li>
                 <li><a href="#resultados" class="nav-link">Resultados</a></li>
+                <li><a href="#clientes" class="nav-link">Clientes</a></li>
                 <li><a href="#formulario" class="nav-link nav-cta">Falar com Especialista</a></li>
             </ul>
         </div>
@@ -486,6 +482,89 @@
         </div>
     </section>
 
+    <!-- Clients Section -->
+    <section class="clients" id="clientes">
+        <div class="container">
+            <div class="section-header center">
+                <div class="section-eyebrow" data-reveal>
+                    <span class="eyebrow-line"></span>
+                    <span>Parceiros de sucesso</span>
+                </div>
+                <h2 class="section-title" data-reveal>
+                    Empresas que <span class="highlight">confiam no nosso trabalho</span>
+                </h2>
+            </div>
+            <div class="clients-carousel" id="clientsCarousel">
+                <button class="carousel-btn carousel-prev" aria-label="Anterior">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+                </button>
+                <div class="carousel-viewport">
+                    <div class="carousel-track" id="carouselTrack">
+                        <div class="client-card" data-reveal>
+                            <div class="client-logo-wrap">
+                                <img src="img/cliente_agua_saqua.png" alt="Água Saquarema" loading="lazy" width="169" height="120">
+                            </div>
+                        </div>
+                        <div class="client-card" data-reveal>
+                            <div class="client-logo-wrap">
+                                <img src="img/cliente_alemdavisao.png" alt="Além da Visão" loading="lazy" width="170" height="74">
+                            </div>
+                        </div>
+                        <div class="client-card" data-reveal>
+                            <div class="client-logo-wrap">
+                                <img src="img/cliente_carol_petgroom.png" alt="Carol Pet Groom" loading="lazy" width="65" height="120">
+                            </div>
+                        </div>
+                        <div class="client-card" data-reveal>
+                            <div class="client-logo-wrap">
+                                <img src="img/cliente_castelhana_praia.png" alt="Castelhana Praia Hotel" loading="lazy" width="141" height="120">
+                            </div>
+                        </div>
+                        <div class="client-card" data-reveal>
+                            <div class="client-logo-wrap">
+                                <img src="img/cliente_castelhana_sudoeste.png" alt="Pousada Sudoeste Castelhana" loading="lazy" width="150" height="120">
+                            </div>
+                        </div>
+                        <div class="client-card" data-reveal>
+                            <div class="client-logo-wrap">
+                                <img src="img/cliente_construtora_cristal.png" alt="Construtora Cristal" loading="lazy" width="156" height="120">
+                            </div>
+                        </div>
+                        <div class="client-card" data-reveal>
+                            <div class="client-logo-wrap logo-daniela">
+                                <img src="img/cliente_daniela_vianello.png" alt="Daniela Vianello Biomédica Esteta" loading="lazy" width="170" height="172">
+                            </div>
+                        </div>
+                        <div class="client-card" data-reveal>
+                            <div class="client-logo-wrap">
+                                <img src="img/cliente_floral_color.png" alt="Floral Color" loading="lazy" width="116" height="119">
+                            </div>
+                        </div>
+                        <div class="client-card" data-reveal>
+                            <div class="client-logo-wrap">
+                                <img src="img/cliente_peskdo.png" alt="Peskdo" loading="lazy" width="141" height="73">
+                            </div>
+                        </div>
+                        <div class="client-card" data-reveal>
+                            <div class="client-logo-wrap">
+                                <img src="img/cliente_pet_channel.png" alt="Pet Channel" loading="lazy" width="160" height="120">
+                            </div>
+                        </div>
+                        <div class="client-card" data-reveal>
+                            <div class="client-logo-wrap">
+                                <img src="img/cliente_serra_mineira.png" alt="Serra Mineira" loading="lazy" width="178" height="120">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-btn carousel-next" aria-label="Próximo">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+                </button>
+                <div class="carousel-dots" id="carouselDots"></div>
+            </div>
+        </div>
+    </section>
+
     <!-- CTA Section -->
     <section class="cta" id="contato">
         <div class="cta-bg">
@@ -526,12 +605,7 @@
             <div class="footer-grid">
                 <div class="footer-brand">
                     <a href="#" class="footer-logo">
-                        <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <circle cx="100" cy="100" r="85" stroke="currentColor" stroke-width="14" fill="none"/>
-                            <circle cx="100" cy="100" r="50" stroke="currentColor" stroke-width="14" fill="none"/>
-                            <path d="M100 15 L100 100 M55 100 L145 100" stroke="currentColor" stroke-width="14" stroke-linecap="round"/>
-                            <path d="M100 50 Q140 50 155 85" stroke="currentColor" stroke-width="14" stroke-linecap="round" fill="none"/>
-                        </svg>
+                        <img src="img/logo_elabore_branca.png" alt="Grupo Elabore" class="footer-logo-img" width="40" height="40">
                         <span>elabore</span>
                     </a>
                     <p class="footer-tagline">Estratégia · Marketing · Design · Performance</p>
@@ -544,6 +618,7 @@
                         <li><a href="#servicos">Serviços</a></li>
                         <li><a href="#metodologia">Metodologia</a></li>
                         <li><a href="#resultados">Resultados</a></li>
+                        <li><a href="#clientes">Clientes</a></li>
                         <li><a href="#contato">Contato</a></li>
                     </ul>
                 </div>

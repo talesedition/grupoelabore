@@ -18,6 +18,7 @@
         initSmoothScroll();
         initHeroParallax();
         initLeadFormPhoneMask();
+        initClientsCarousel();
     });
 
     // ========================================
@@ -290,6 +291,195 @@
                 e.target.value = value;
             });
         }
+    }
+
+    // ========================================
+    // CLIENTS CAROUSEL
+    // ========================================
+
+    function initClientsCarousel() {
+        const carousel = document.getElementById('clientsCarousel');
+        const track = document.getElementById('carouselTrack');
+        const prevBtn = carousel.querySelector('.carousel-prev');
+        const nextBtn = carousel.querySelector('.carousel-next');
+        const dotsContainer = document.getElementById('carouselDots');
+
+        if (!carousel || !track) return;
+
+        const cards = Array.from(track.children);
+        if (cards.length === 0) return;
+
+        let currentIndex = 0;
+        let slidesPerView = getSlidesPerView();
+        let totalSlides = Math.ceil(cards.length / slidesPerView);
+        let isDragging = false;
+        let startPos = 0;
+        let currentTranslate = 0;
+        let prevTranslate = 0;
+        let animationID = 0;
+
+        // Create dots
+        function createDots() {
+            dotsContainer.innerHTML = '';
+            for (let i = 0; i < totalSlides; i++) {
+                const dot = document.createElement('button');
+                dot.classList.add('carousel-dot');
+                dot.setAttribute('aria-label', `Slide ${i + 1}`);
+                if (i === 0) dot.classList.add('active');
+                dot.addEventListener('click', () => goToSlide(i));
+                dotsContainer.appendChild(dot);
+            }
+        }
+
+        function getSlidesPerView() {
+            const width = window.innerWidth;
+            if (width <= 480) return 1;
+            if (width <= 768) return 2;
+            if (width <= 1024) return 3;
+            return 4;
+        }
+
+        function updateCarousel() {
+            slidesPerView = getSlidesPerView();
+            totalSlides = Math.ceil(cards.length / slidesPerView);
+
+            // Recreate dots if total changed
+            const currentDots = dotsContainer.children.length;
+            if (currentDots !== totalSlides) {
+                createDots();
+            }
+
+            // Clamp index
+            if (currentIndex >= totalSlides) currentIndex = totalSlides - 1;
+            if (currentIndex < 0) currentIndex = 0;
+
+            const cardStyle = getComputedStyle(cards[0]);
+            const cardWidth = cards[0].offsetWidth;
+            const gap = parseFloat(cardStyle.marginRight) || 20; // fallback
+            // Use exact gap from CSS (20px)
+            const gapSize = 20;
+            const slideWidth = cardWidth + gapSize;
+            const offset = currentIndex * slideWidth * slidesPerView;
+
+            track.style.transform = `translateX(-${offset}px)`;
+
+            // Update dots
+            Array.from(dotsContainer.children).forEach((dot, i) => {
+                dot.classList.toggle('active', i === currentIndex);
+            });
+
+            // Update buttons
+            prevBtn.disabled = currentIndex === 0;
+            nextBtn.disabled = currentIndex >= totalSlides - 1;
+        }
+
+        function goToSlide(index) {
+            currentIndex = index;
+            updateCarousel();
+        }
+
+        function nextSlide() {
+            if (currentIndex < totalSlides - 1) {
+                currentIndex++;
+                updateCarousel();
+            }
+        }
+
+        function prevSlide() {
+            if (currentIndex > 0) {
+                currentIndex--;
+                updateCarousel();
+            }
+        }
+
+        // Touch / Drag support
+        function getPositionX(event) {
+            return event.type.includes('mouse') ? event.pageX : event.touches[0].clientX;
+        }
+
+        function touchStart(index) {
+            return function(event) {
+                isDragging = true;
+                startPos = getPositionX(event);
+                animationID = requestAnimationFrame(animation);
+                track.style.transition = 'none';
+                carousel.style.cursor = 'grabbing';
+            };
+        }
+
+        function touchMove(event) {
+            if (isDragging) {
+                const currentPosition = getPositionX(event);
+                const diff = currentPosition - startPos;
+                currentTranslate = prevTranslate + diff;
+                track.style.transform = `translateX(${currentTranslate}px)`;
+            }
+        }
+
+        function touchEnd() {
+            isDragging = false;
+            cancelAnimationFrame(animationID);
+            track.style.transition = 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)';
+            carousel.style.cursor = 'grab';
+
+            const movedBy = currentTranslate - prevTranslate;
+            const threshold = 50;
+
+            if (movedBy < -threshold && currentIndex < totalSlides - 1) {
+                currentIndex++;
+            } else if (movedBy > threshold && currentIndex > 0) {
+                currentIndex--;
+            }
+
+            updateCarousel();
+        }
+
+        function animation() {
+            if (isDragging) requestAnimationFrame(animation);
+        }
+
+        // Event listeners
+        prevBtn.addEventListener('click', prevSlide);
+        nextBtn.addEventListener('click', nextSlide);
+
+        // Touch events
+        track.addEventListener('touchstart', touchStart(currentIndex), { passive: true });
+        track.addEventListener('touchend', touchEnd);
+        track.addEventListener('touchmove', touchMove, { passive: true });
+
+        // Mouse drag events
+        track.addEventListener('mousedown', touchStart(currentIndex));
+        track.addEventListener('mouseup', touchEnd);
+        track.addEventListener('mouseleave', () => {
+            if (isDragging) touchEnd();
+        });
+        track.addEventListener('mousemove', touchMove);
+
+        // Prevent context menu on right click during drag
+        track.addEventListener('contextmenu', e => {
+            e.preventDefault();
+            e.stopPropagation();
+            return false;
+        });
+
+        // Resize
+        let resizeTimer;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(() => {
+                updateCarousel();
+            }, 150);
+        });
+
+        // Init
+        createDots();
+        updateCarousel();
+
+        // Accessibility: keyboard navigation
+        carousel.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') prevSlide();
+            if (e.key === 'ArrowRight') nextSlide();
+        });
     }
 
     // ========================================
