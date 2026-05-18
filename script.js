@@ -266,29 +266,6 @@
 
             rafId = requestAnimationFrame(animateParallax);
         }
-
-        // Scroll parallax for hero content
-        let scrollTicking = false;
-
-        window.addEventListener('scroll', function() {
-            if (!scrollTicking && isHeroVisible) {
-                requestAnimationFrame(() => {
-                    const scrollY = window.pageYOffset;
-                    const heroContent = document.querySelector('.hero-content');
-
-                    if (heroContent && scrollY < window.innerHeight) {
-                        const parallaxAmount = scrollY * 0.3;
-                        const opacityAmount = 1 - (scrollY / (window.innerHeight * 0.6));
-
-                        heroContent.style.transform = `translateY(${parallaxAmount}px)`;
-                        heroContent.style.opacity = Math.max(0.3, opacityAmount);
-                    }
-
-                    scrollTicking = false;
-                });
-                scrollTicking = true;
-            }
-        }, { passive: true });
     }
 
     // ========================================
