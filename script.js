@@ -17,6 +17,7 @@
         initMobileMenu();
         initSmoothScroll();
         initHeroParallax();
+        initLeadFormPhoneMask();
     });
 
     // ========================================
@@ -291,6 +292,30 @@
     }
 
     // ========================================
+    // LEAD FORM PHONE MASK
+    // ========================================
+
+    function initLeadFormPhoneMask() {
+        const leadPhone = document.getElementById('leadTelefone');
+        if (leadPhone) {
+            leadPhone.addEventListener('input', function(e) {
+                let value = e.target.value.replace(/\D/g, '');
+                if (value.length > 11) value = value.slice(0, 11);
+                if (value.length >= 2) {
+                    value = `(${value.slice(0, 2)}) ${value.slice(2)}`;
+                }
+                if (value.length >= 10) {
+                    const parts = value.split(' ');
+                    if (parts[1] && parts[1].length > 5) {
+                        value = `${parts[0]} ${parts[1].slice(0, 5)}-${parts[1].slice(5)}`;
+                    }
+                }
+                e.target.value = value;
+            });
+        }
+    }
+
+    // ========================================
     // MODAL FUNCTIONS (Global)
     // ========================================
 
@@ -332,7 +357,7 @@
     });
 
     // ========================================
-    // FORM HANDLER
+    // FORM HANDLER (Modal)
     // ========================================
 
     window.handleFormSubmit = function(e) {
@@ -375,7 +400,37 @@
     };
 
     // ========================================
-    // WHATSAPP INPUT MASK
+    // LEAD FORM HANDLER
+    // ========================================
+
+    window.handleLeadFormSubmit = function(e) {
+        e.preventDefault();
+
+        const form = e.target;
+        const btn = form.querySelector('.btn-lead');
+        const originalText = btn.innerHTML;
+
+        // Loading state
+        btn.disabled = true;
+        btn.innerHTML = `<span>Enviando...</span>`;
+
+        // Simulate submission (replace with actual API call)
+        setTimeout(() => {
+            btn.innerHTML = `<span>Enviado com sucesso!</span>`;
+            btn.style.background = '#22c55e';
+
+            // Reset after delay
+            setTimeout(() => {
+                form.reset();
+                btn.disabled = false;
+                btn.innerHTML = originalText;
+                btn.style.background = '';
+            }, 2000);
+        }, 1500);
+    };
+
+    // ========================================
+    // WHATSAPP INPUT MASK (Modal)
     // ========================================
 
     document.addEventListener('DOMContentLoaded', function() {
