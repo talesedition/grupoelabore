@@ -107,6 +107,7 @@ img {
     z-index: 1000;
     padding: 20px 0;
     transition: var(--transition-base);
+    transform: translateY(0) !important;
 }
 
 .navbar.scrolled {
@@ -129,7 +130,7 @@ img {
 .nav-logo {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 8px;
     color: var(--text-primary);
     font-weight: 700;
     font-size: 1.5rem;
@@ -138,8 +139,8 @@ img {
 }
 
 .logo-img {
-    width: 40px;
-    height: 40px;
+    width: 52px;
+    height: 52px;
     object-fit: contain;
     transition: var(--transition-base);
 }
@@ -738,13 +739,18 @@ img {
 .about-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 80px;
+    gap: 60px;
     align-items: start;
 }
 
 .about-text {
-    position: sticky;
-    top: 120px;
+    position: static;
+}
+
+.about-title {
+    font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+    line-height: 1.25;
+    margin-bottom: 32px;
 }
 
 .about-visual {
@@ -772,11 +778,17 @@ img {
     transform: scale(1.03);
 }
 
+.pillars-column {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
 .pillar-card {
     background: linear-gradient(135deg, rgba(113, 48, 230, 0.04), rgba(255, 255, 255, 0.9));
     border: 1px solid var(--border-light);
     border-radius: var(--radius-lg);
-    padding: 32px;
+    padding: 28px;
     transition: var(--transition-base);
     position: relative;
     overflow: hidden;
@@ -815,7 +827,7 @@ img {
     background: rgba(113, 48, 230, 0.08);
     border-radius: var(--radius-md);
     color: var(--purple-primary);
-    margin-bottom: 20px;
+    margin-bottom: 16px;
 }
 
 .pillar-card h3 {
@@ -843,7 +855,7 @@ img {
 
 .services-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 24px;
 }
 
@@ -919,13 +931,27 @@ img {
 .service-list {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 10px;
 }
 
 .service-list li {
     font-size: 0.875rem;
     color: var(--text-secondary);
     line-height: 1.5;
+    position: relative;
+    padding-left: 20px;
+}
+
+.service-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 7px;
+    width: 8px;
+    height: 8px;
+    background: var(--purple-primary);
+    border-radius: 50%;
+    opacity: 0.8;
 }
 
 /* ========================================
@@ -1806,6 +1832,11 @@ img {
         max-width: 500px;
         margin: 0 auto;
     }
+
+    /* Services: 2 cols on tablet */
+    .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
 @media (max-width: 768px) {
@@ -2015,8 +2046,8 @@ img {
     }
 
     .logo-img {
-        width: 36px;
-        height: 36px;
+        width: 44px;
+        height: 44px;
     }
 
     .nav-logo .logo-text {

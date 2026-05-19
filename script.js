@@ -1,10 +1,41 @@
 /* ========================================
    GRUPO ELABORE — SCRIPT.JS
    Interações Premium & Performance
+   ========================================
+
+   INSTRUÇÕES PARA GOOGLE SHEETS:
+   1. Crie uma planilha no Google Sheets
+   2. Vá em Extensões > Apps Script
+   3. Cole o código abaixo e salve:
+
+   function doPost(e) {
+     var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+     var data = JSON.parse(e.postData.contents);
+     sheet.appendRow([
+       new Date(),
+       data.nome || '',
+       data.telefone || '',
+       data.email || '',
+       data.empresa || '',
+       data.faturamento || '',
+       data.segmento || ''
+     ]);
+     return ContentService.createTextOutput(JSON.stringify({result: "success"}))
+       .setMimeType(ContentService.MimeType.JSON);
+   }
+
+   4. Clique em "Implantar" > "Novo implantação" > escolha "Web app"
+   5. Em "Quem pode acessar" selecione "Qualquer pessoa"
+   6. Copie a URL gerada e cole na constante GOOGLE_SHEETS_URL abaixo
    ======================================== */
 
 (function() {
     'use strict';
+
+    // ========================================
+    // CONFIGURAÇÃO GOOGLE SHEETS
+    // ========================================
+    const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbxVPvUkVBKRreNagrk6Wur7O5_WuRY7PVaRih6hgjftuKZubxx11-d46Htsx3dZbjEANw/exec'; // Cole aqui a URL do seu Web App do Google Apps Script
 
     // ========================================
     // DOM Ready Handler
@@ -28,7 +59,6 @@
 
     function initNavbar() {
         const navbar = document.getElementById('navbar');
-        let lastScroll = 0;
         let ticking = false;
 
         function updateNavbar() {
@@ -41,14 +71,9 @@
                 navbar.classList.remove('scrolled');
             }
 
-            // Hide/show on scroll direction (optional, subtle)
-            if (currentScroll > lastScroll && currentScroll > 200) {
-                navbar.style.transform = 'translateY(-100%)';
-            } else {
-                navbar.style.transform = 'translateY(0)';
-            }
+            // Menu sempre visível — removido hide/show
+            navbar.style.transform = 'translateY(0)';
 
-            lastScroll = currentScroll;
             ticking = false;
         }
 
@@ -601,7 +626,7 @@
     };
 
     // ========================================
-    // LEAD FORM HANDLER
+    // LEAD FORM HANDLER + GOOGLE SHEETS
     // ========================================
 
     window.handleLeadFormSubmit = function(e) {
@@ -615,19 +640,61 @@
         btn.disabled = true;
         btn.innerHTML = `<span>Enviando...</span>`;
 
-        // Simulate submission (replace with actual API call)
-        setTimeout(() => {
-            btn.innerHTML = `<span>Enviado com sucesso!</span>`;
-            btn.style.background = '#22c55e';
+        // Coletar dados
+        const formData = {
+            nome: form.nome.value,
+            telefone: form.telefone.value,
+            email: form.email.value,
+            empresa: form.empresa.value,
+            faturamento: form.faturamento.value,
+            segmento: form.segmento.value
+        };
 
-            // Reset after delay
+        // Função para finalizar o envio (sucesso ou erro)
+        function finishSubmit(success, message) {
+            if (success) {
+                btn.innerHTML = `<span>${message || 'Enviado com sucesso!'}</span>`;
+                btn.style.background = '#22c55e';
+            } else {
+                btn.innerHTML = `<span>${message || 'Erro ao enviar'}</span>`;
+                btn.style.background = '#dc2626';
+            }
+
             setTimeout(() => {
                 form.reset();
                 btn.disabled = false;
                 btn.innerHTML = originalText;
                 btn.style.background = '';
-            }, 2000);
-        }, 1500);
+            }, 2500);
+        }
+
+        // Se não tiver URL configurada, simula o envio
+        if (!GOOGLE_SHEETS_URL) {
+            console.warn('GOOGLE_SHEETS_URL não configurada. Configure a URL do Web App no topo do script.js');
+            setTimeout(() => finishSubmit(true, 'Enviado com sucesso! (modo simulação)'), 1500);
+            return;
+        }
+
+        // Enviar para Google Sheets
+        fetch(GOOGLE_SHEETS_URL, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(formData)
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.result === 'success') {
+                finishSubmit(true, 'Enviado com sucesso!');
+            } else {
+                finishSubmit(false, 'Erro ao salvar. Tente novamente.');
+            }
+        })
+        .catch(error => {
+            console.error('Erro ao enviar para Google Sheets:', error);
+            finishSubmit(false, 'Erro de conexão. Tente novamente.');
+        });
     };
 
     // ========================================
