@@ -10,8 +10,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <base target="_blank">
-<base target="_blank">
-<base target="_blank">
 </head>
 <body>
     <!-- Navigation -->
@@ -44,26 +42,40 @@
             <div class="hero-grid"></div>
         </div>
         <div class="hero-content">
-            <h1 class="hero-title" data-reveal>
-                <span class="line">Elaboramos</span>
-                <span class="line">estratégias</span>
-                <span class="line">que geram</span>
-                <span class="line">resultados reais</span>
-            </h1>
-            <p class="hero-subtitle" data-reveal>
-                Marketing digital estratégico, tráfego pago, design e tecnologia operando como um só time. 
-                Transformamos marcas em máquinas de crescimento previsível.
-            </p>
-            <div class="hero-actions" data-reveal>
-                <a href="#formulario" class="btn btn-primary">
-                    <span>Iniciar Diagnóstico Gratuito</span>
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-                </a>
-                <a href="#servicos" class="btn btn-ghost">Conhecer Serviços</a>
+            <div class="hero-text">
+                <h1 class="hero-title" data-reveal>
+                    <span class="hero-line-group">
+                        <span class="line">Elaboramos</span>
+                        <span class="line">estratégias</span>
+                    </span>
+                    <span class="hero-line-group">
+                        <span class="line">que geram</span>
+                        <span class="line">resultados reais</span>
+                    </span>
+                </h1>
+                <p class="hero-subtitle" data-reveal>
+                    Marketing digital estratégico, tráfego pago, design e tecnologia operando como um só time. 
+                    Transformamos marcas em máquinas de crescimento previsível.
+                </p>
+                <div class="hero-actions" data-reveal>
+                    <a href="#formulario" class="btn btn-primary">
+                        <span>Iniciar Diagnóstico Gratuito</span>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                    </a>
+                    <a href="#servicos" class="btn btn-ghost">Conhecer Serviços</a>
+                </div>
+            </div>
+            <div class="hero-visual" data-reveal>
+                <div class="hero-image-wrap">
+                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80" 
+                         alt="Dashboard de marketing digital e estratégia de crescimento" 
+                         class="hero-image" loading="eager" width="800" height="600">
+                    <div class="hero-image-glow"></div>
+                </div>
             </div>
             <div class="hero-stats" data-reveal>
                 <div class="stat">
-                    <span class="stat-number" data-count="500">0</span><span class="stat-suffix">+</span>
+                    <span class="stat-number" data-count="150">0</span><span class="stat-suffix">+</span>
                     <span class="stat-label">Clientes Atendidos</span>
                 </div>
                 <div class="stat-divider"></div>
@@ -83,6 +95,10 @@
     <!-- Lead Form Section -->
     <section class="lead-form" id="formulario">
         <div class="container">
+            <div class="lead-form-header" data-reveal>
+                <h2 class="lead-form-title">Receba uma consultoria estratégica gratuita</h2>
+                <p class="lead-form-subtitle">Preencha seus dados e nossa equipe entrará em contato em até 24h.</p>
+            </div>
             <div class="lead-form-wrapper">
                 <form class="lead-form-grid" onsubmit="handleLeadFormSubmit(event)">
                     <div class="form-field form-field--full">
@@ -166,6 +182,11 @@
                     </p>
                 </div>
                 <div class="about-visual" data-reveal>
+                    <div class="about-image-wrap">
+                        <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80" 
+                             alt="Equipe Elabore em reunião estratégica de marketing" 
+                             class="about-image" loading="lazy" width="800" height="600">
+                    </div>
                     <div class="pillar-card pillar-1">
                         <div class="pillar-icon">
                             <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
@@ -195,7 +216,7 @@
     <!-- Services Section -->
     <section class="services" id="servicos">
         <div class="container">
-            <div class="section-header">
+            <div class="section-header center">
                 <div class="section-eyebrow" data-reveal>
                     <span class="eyebrow-line"></span>
                     <span>O que fazemos</span>
@@ -445,7 +466,8 @@
                     </div>
                     <p class="testimonial-text">"Com a Elabore, reduzimos CAC em 32% e dobramos o faturamento em 90 dias. Estratégia de verdade."</p>
                     <div class="testimonial-author">
-                        <div class="author-avatar">RA</div>
+                        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=200&q=80" 
+                             alt="Ronaldo Azevedo" class="author-avatar" loading="lazy" width="88" height="88">
                         <div class="author-info">
                             <span class="author-name">Ronaldo Azevedo</span>
                             <span class="author-role">CEO & Founder</span>
@@ -458,7 +480,8 @@
                     </div>
                     <p class="testimonial-text">"Implementaram CRM, playbooks e métricas. Nosso time passou a converter 27% a mais. Profissionalismo total."</p>
                     <div class="testimonial-author">
-                        <div class="author-avatar">AS</div>
+                        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=200&q=80" 
+                             alt="André Sodré" class="author-avatar" loading="lazy" width="88" height="88">
                         <div class="author-info">
                             <span class="author-name">André Sodré</span>
                             <span class="author-role">Gerente Operacional</span>
@@ -471,7 +494,8 @@
                     </div>
                     <p class="testimonial-text">"Escala com previsibilidade: +118% de leads qualificados e CPL 23% menor. Resultado que se vê no faturamento."</p>
                     <div class="testimonial-author">
-                        <div class="author-avatar">CS</div>
+                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=200&q=80" 
+                             alt="Catarine Spuzzi" class="author-avatar" loading="lazy" width="88" height="88">
                         <div class="author-info">
                             <span class="author-name">Catarine Spuzzi</span>
                             <span class="author-role">Co-fundadora</span>
@@ -502,17 +526,7 @@
                     <div class="carousel-track" id="carouselTrack">
                         <div class="client-card" data-reveal>
                             <div class="client-logo-wrap">
-                                <img src="img/cliente_agua_saqua.png" alt="Água Saquarema" loading="lazy" width="169" height="120">
-                            </div>
-                        </div>
-                        <div class="client-card" data-reveal>
-                            <div class="client-logo-wrap">
-                                <img src="img/cliente_alemdavisao.png" alt="Além da Visão" loading="lazy" width="170" height="74">
-                            </div>
-                        </div>
-                        <div class="client-card" data-reveal>
-                            <div class="client-logo-wrap">
-                                <img src="img/cliente_carol_petgroom.png" alt="Carol Pet Groom" loading="lazy" width="65" height="120">
+                                <img src="img/cliente_pet_channel.png" alt="Pet Channel" loading="lazy" width="160" height="120">
                             </div>
                         </div>
                         <div class="client-card" data-reveal>
@@ -527,12 +541,17 @@
                         </div>
                         <div class="client-card" data-reveal>
                             <div class="client-logo-wrap">
-                                <img src="img/cliente_construtora_cristal.png" alt="Construtora Cristal" loading="lazy" width="156" height="120">
+                                <img src="img/cliente_peskdo.png" alt="Peskdo" loading="lazy" width="141" height="73">
                             </div>
                         </div>
                         <div class="client-card" data-reveal>
-                            <div class="client-logo-wrap logo-daniela">
-                                <img src="img/cliente_daniela_vianello.png" alt="Daniela Vianello Biomédica Esteta" loading="lazy" width="170" height="172">
+                            <div class="client-logo-wrap">
+                                <img src="img/cliente_serra_mineira.png" alt="Serra Mineira" loading="lazy" width="178" height="120">
+                            </div>
+                        </div>
+                        <div class="client-card" data-reveal>
+                            <div class="client-logo-wrap">
+                                <img src="img/cliente_agua_saqua.png" alt="Água Saquarema" loading="lazy" width="169" height="120">
                             </div>
                         </div>
                         <div class="client-card" data-reveal>
@@ -542,17 +561,22 @@
                         </div>
                         <div class="client-card" data-reveal>
                             <div class="client-logo-wrap">
-                                <img src="img/cliente_peskdo.png" alt="Peskdo" loading="lazy" width="141" height="73">
+                                <img src="img/cliente_alemdavisao.png" alt="Além da Visão" loading="lazy" width="170" height="74">
                             </div>
                         </div>
                         <div class="client-card" data-reveal>
                             <div class="client-logo-wrap">
-                                <img src="img/cliente_pet_channel.png" alt="Pet Channel" loading="lazy" width="160" height="120">
+                                <img src="img/cliente_carol_petgroom.png" alt="Carol Pet Groom" loading="lazy" width="65" height="120">
                             </div>
                         </div>
                         <div class="client-card" data-reveal>
                             <div class="client-logo-wrap">
-                                <img src="img/cliente_serra_mineira.png" alt="Serra Mineira" loading="lazy" width="178" height="120">
+                                <img src="img/cliente_construtora_cristal.png" alt="Construtora Cristal" loading="lazy" width="156" height="120">
+                            </div>
+                        </div>
+                        <div class="client-card" data-reveal>
+                            <div class="client-logo-wrap logo-daniela">
+                                <img src="img/cliente_daniela_vianello.png" alt="Daniela Vianello Biomédica Esteta" loading="lazy" width="170" height="172">
                             </div>
                         </div>
                     </div>
