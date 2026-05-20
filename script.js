@@ -1,60 +1,9 @@
 /* ========================================
-   GRUPO ELABORE — SCRIPT.JS
+   GRUPO ELABORE - SCRIPT.JS
    Interações Premium & Performance
    ========================================
 
-   INSTRUÇÕES PARA GOOGLE SHEETS:
-   1. Crie uma planilha no Google Sheets
-   2. Vá em Extensões > Apps Script
-   3. Cole o código abaixo e salve:
-
-   function doPost(e) {
-     try {
-       var data = JSON.parse(e.postData.contents);
-       var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
-       sheet.appendRow([
-         new Date(),
-         data.nome || '',
-         data.telefone || '',
-         data.email || '',
-         data.empresa || '',
-         data.faturamento || '',
-         data.segmento || ''
-       ]);
-       return ContentService.createTextOutput(JSON.stringify({result: "success"}))
-         .setMimeType(ContentService.MimeType.JSON)
-         .setHeaders({
-           "Access-Control-Allow-Origin": "*",
-           "Access-Control-Allow-Methods": "POST, GET, OPTIONS",
-           "Access-Control-Allow-Headers": "Content-Type"
-         });
-     } catch (error) {
-       return ContentService.createTextOutput(JSON.stringify({result: "error", message: error.toString()}))
-         .setMimeType(ContentService.MimeType.JSON)
-         .setHeaders({"Access-Control-Allow-Origin": "*"});
-     }
-   }
-
-   function doOptions(e) {
-     return ContentService.createTextOutput("")
-       .setMimeType(ContentService.MimeType.TEXT)
-       .setHeaders({
-         "Access-Control-Allow-Origin": "*",
-         "Access-Control-Allow-Methods": "POST, GET, OPTIONS",
-         "Access-Control-Allow-Headers": "Content-Type"
-       });
-   }
-
-   function doGet(e) {
-     return ContentService.createTextOutput(JSON.stringify({status: "API Elabore funcionando!"}))
-       .setMimeType(ContentService.MimeType.JSON)
-       .setHeaders({"Access-Control-Allow-Origin": "*"});
-   }
-
-   4. Clique em "Implantar" > "Novo implantação" > escolha "Web app"
-   5. Em "Quem pode acessar" selecione "Qualquer pessoa"
-   6. Copie a URL gerada e cole na constante GOOGLE_SHEETS_URL abaixo
-   ======================================== */
+*/
 
 (function() {
     'use strict';
@@ -98,7 +47,7 @@
                 navbar.classList.remove('scrolled');
             }
 
-            // Menu sempre visível — removido hide/show
+            // Menu sempre visível - removido hide/show
             navbar.style.transform = 'translateY(0)';
 
             ticking = false;
@@ -116,7 +65,7 @@
     }
 
     // ========================================
-    // SCROLL SPY — Menu Active State
+    // SCROLL SPY - Menu Active State
     // ========================================
 
     function initScrollSpy() {
@@ -702,7 +651,7 @@
             return;
         }
 
-        // Enviar para Google Sheets — usa text/plain para evitar preflight CORS
+        // Enviar para Google Sheets - usa text/plain para evitar preflight CORS
         fetch(GOOGLE_SHEETS_URL, {
             method: 'POST',
             headers: {

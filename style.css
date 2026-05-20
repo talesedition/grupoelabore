@@ -1,11 +1,11 @@
 /* ========================================
-   GRUPO ELABORE — STYLE.CSS
+   GRUPO ELABORE - STYLE.CSS
    Light Mode Premium | Paleta: Branco · Preto · Roxo
    ======================================== */
 
-/* CSS Variables — Paleta Light Mode Elabore */
+/* CSS Variables - Paleta Light Mode Elabore */
 :root {
-    /* Roxo — Cor de Destaque */
+    /* Roxo - Cor de Destaque */
     --purple-primary: #7130E6;
     --purple-light: #9B6AF0;
     --purple-dark: #5A1EB8;
@@ -1196,7 +1196,7 @@ img {
 }
 
 /* ========================================
-   CLIENTS SECTION — CAROUSEL
+   CLIENTS SECTION - CAROUSEL
    ======================================== */
 
 .clients {
@@ -1225,7 +1225,7 @@ img {
     will-change: transform;
 }
 
-/* Client Cards — Fundo Roxo Escuro */
+/* Client Cards - Fundo Roxo Escuro */
 .client-card {
     background: #1a0a2e;
     border: 1px solid rgba(113, 48, 230, 0.25);
@@ -1287,7 +1287,7 @@ img {
     filter: brightness(1.15) opacity(1);
 }
 
-/* Logo Daniela Vianello — destaque ampliado */
+/* Logo Daniela Vianello - destaque ampliado */
 .logo-daniela img {
     transform: scale(2.4);
     filter: brightness(0.95) opacity(1);
@@ -1747,7 +1747,7 @@ img {
 
 
 /* ========================================
-   AJUSTES CLIENTE — Títulos Centralizados
+   AJUSTES CLIENTE - Títulos Centralizados
    ======================================== */
 
 /* Remover traços/linhas do eyebrow */
@@ -2153,4 +2153,56 @@ select:focus-visible {
 
 ::-webkit-scrollbar-thumb:hover {
     background: var(--text-muted);
+}
+/* ========================================
+   AJUSTES CLIENTE - Centralização Completa
+   ======================================== */
+
+/* Garantir centralização de todos os headers */
+.section-header.center,
+.section-header.center .section-eyebrow,
+.section-header.center .section-title {
+    text-align: center;
+    justify-content: center;
+}
+
+/* Garantir que eyebrow não tenha traços e fique alinhado */
+.section-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0;
+}
+
+.section-eyebrow::before,
+.section-eyebrow::after {
+    display: none !important;
+    content: none !important;
+}
+
+/* Alinhar textos menores (eyebrow) aos títulos maiores em todas as seções */
+.about-text .section-eyebrow,
+.about-text .section-title,
+.about-text .section-body,
+.diff-left .section-eyebrow,
+.diff-left .section-title,
+.section-header.center .section-eyebrow,
+.section-header.center .section-title {
+    text-align: center;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Ajuste específico para mobile */
+@media (max-width: 768px) {
+    .section-header.center,
+    .section-header.center .section-eyebrow,
+    .section-header.center .section-title,
+    .about-text,
+    .diff-left,
+    .about-text .section-eyebrow,
+    .diff-left .section-eyebrow {
+        text-align: center !important;
+        justify-content: center !important;
+    }
 }
