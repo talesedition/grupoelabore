@@ -1745,6 +1745,46 @@ img {
 [data-reveal]:nth-child(5) { transition-delay: 0.32s; }
 [data-reveal]:nth-child(6) { transition-delay: 0.40s; }
 
+
+/* ========================================
+   AJUSTES CLIENTE — Títulos Centralizados
+   ======================================== */
+
+/* Remover traços/linhas do eyebrow */
+.eyebrow-line {
+    display: none;
+}
+
+/* Centralizar todos os títulos de seção */
+.about-text,
+.diff-left {
+    text-align: center;
+}
+
+.section-eyebrow {
+    justify-content: center;
+}
+
+/* Garantir centralização no mobile */
+@media (max-width: 768px) {
+    .section-title,
+    .about-title,
+    .section-eyebrow,
+    .cta-title,
+    .diff-left .section-title {
+        text-align: center !important;
+    }
+
+    .about-text,
+    .diff-left {
+        text-align: center;
+    }
+
+    .section-eyebrow {
+        justify-content: center;
+    }
+}
+
 /* ========================================
    RESPONSIVE
    ======================================== */
