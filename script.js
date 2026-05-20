@@ -9,19 +9,46 @@
    3. Cole o código abaixo e salve:
 
    function doPost(e) {
-     var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
-     var data = JSON.parse(e.postData.contents);
-     sheet.appendRow([
-       new Date(),
-       data.nome || '',
-       data.telefone || '',
-       data.email || '',
-       data.empresa || '',
-       data.faturamento || '',
-       data.segmento || ''
-     ]);
-     return ContentService.createTextOutput(JSON.stringify({result: "success"}))
-       .setMimeType(ContentService.MimeType.JSON);
+     try {
+       var data = JSON.parse(e.postData.contents);
+       var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+       sheet.appendRow([
+         new Date(),
+         data.nome || '',
+         data.telefone || '',
+         data.email || '',
+         data.empresa || '',
+         data.faturamento || '',
+         data.segmento || ''
+       ]);
+       return ContentService.createTextOutput(JSON.stringify({result: "success"}))
+         .setMimeType(ContentService.MimeType.JSON)
+         .setHeaders({
+           "Access-Control-Allow-Origin": "*",
+           "Access-Control-Allow-Methods": "POST, GET, OPTIONS",
+           "Access-Control-Allow-Headers": "Content-Type"
+         });
+     } catch (error) {
+       return ContentService.createTextOutput(JSON.stringify({result: "error", message: error.toString()}))
+         .setMimeType(ContentService.MimeType.JSON)
+         .setHeaders({"Access-Control-Allow-Origin": "*"});
+     }
+   }
+
+   function doOptions(e) {
+     return ContentService.createTextOutput("")
+       .setMimeType(ContentService.MimeType.TEXT)
+       .setHeaders({
+         "Access-Control-Allow-Origin": "*",
+         "Access-Control-Allow-Methods": "POST, GET, OPTIONS",
+         "Access-Control-Allow-Headers": "Content-Type"
+       });
+   }
+
+   function doGet(e) {
+     return ContentService.createTextOutput(JSON.stringify({status: "API Elabore funcionando!"}))
+       .setMimeType(ContentService.MimeType.JSON)
+       .setHeaders({"Access-Control-Allow-Origin": "*"});
    }
 
    4. Clique em "Implantar" > "Novo implantação" > escolha "Web app"
@@ -95,7 +122,7 @@
     function initScrollSpy() {
         const sections = document.querySelectorAll('section[id]');
         const navLinks = document.querySelectorAll('.nav-link[href^="#"]');
-        
+
         if (!sections.length || !navLinks.length) return;
 
         const observerOptions = {
@@ -675,11 +702,11 @@
             return;
         }
 
-        // Enviar para Google Sheets
+        // Enviar para Google Sheets — usa text/plain para evitar preflight CORS
         fetch(GOOGLE_SHEETS_URL, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json',
+                'Content-Type': 'text/plain;charset=utf-8',
             },
             body: JSON.stringify(formData)
         })
