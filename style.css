@@ -1957,9 +1957,8 @@ img {
     }
 
     .hero-visual {
-        order: -1;
         max-width: 500px;
-        margin: 0 auto;
+        margin: 40px auto 0;
     }
 
     /* Services: 2 cols on tablet */
@@ -2142,10 +2141,8 @@ img {
     }
 
     .hero-visual {
-        display: flex;
-        order: -1;
         max-width: 280px;
-        margin: 0 auto 24px;
+        margin: 32px auto 0;
     }
 
     .hero-image-wrap {
