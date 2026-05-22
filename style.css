@@ -2142,7 +2142,14 @@ img {
     }
 
     .hero-visual {
-        display: none;
+        display: flex;
+        order: -1;
+        max-width: 280px;
+        margin: 0 auto 24px;
+    }
+
+    .hero-image-wrap {
+        box-shadow: 0 12px 40px rgba(113, 48, 230, 0.12), 0 4px 16px rgba(0, 0, 0, 0.06);
     }
 }
 
