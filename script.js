@@ -711,4 +711,127 @@
         });
     }
 
+
+    // ========================================
+    // COOKIE BANNER LGPD
+    // ========================================
+
+    function initCookieBanner() {
+        const banner = document.getElementById('cookieBanner');
+        if (!banner) return;
+
+        // Verificar se o usuário já fez uma escolha
+        const cookieConsent = localStorage.getItem('elabore_cookie_consent');
+
+        if (!cookieConsent) {
+            // Mostrar banner após 2 segundos
+            setTimeout(() => {
+                banner.classList.add('active');
+            }, 2000);
+        }
+    }
+
+    window.acceptCookies = function() {
+        const consent = {
+            necessary: true,
+            analytics: true,
+            marketing: true,
+            timestamp: new Date().toISOString(),
+            source: 'banner_accept_all'
+        };
+        localStorage.setItem('elabore_cookie_consent', JSON.stringify(consent));
+        document.getElementById('cookieBanner').classList.remove('active');
+
+        // Disparar evento para ativar scripts de rastreamento
+        window.dispatchEvent(new CustomEvent('cookieConsentUpdated', { detail: consent }));
+    };
+
+    window.rejectCookies = function() {
+        const consent = {
+            necessary: true,
+            analytics: false,
+            marketing: false,
+            timestamp: new Date().toISOString(),
+            source: 'banner_reject_optional'
+        };
+        localStorage.setItem('elabore_cookie_consent', JSON.stringify(consent));
+        document.getElementById('cookieBanner').classList.remove('active');
+
+        window.dispatchEvent(new CustomEvent('cookieConsentUpdated', { detail: consent }));
+    };
+
+    window.openCookieSettings = function() {
+        const overlay = document.getElementById('cookieModalOverlay');
+        if (overlay) {
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+
+            // Carregar preferências salvas
+            const saved = localStorage.getItem('elabore_cookie_consent');
+            if (saved) {
+                const consent = JSON.parse(saved);
+                const analyticsCheck = document.getElementById('cookieAnalytics');
+                const marketingCheck = document.getElementById('cookieMarketing');
+                if (analyticsCheck) analyticsCheck.checked = consent.analytics !== false;
+                if (marketingCheck) marketingCheck.checked = consent.marketing !== false;
+            }
+        }
+    };
+
+    window.closeCookieSettings = function() {
+        const overlay = document.getElementById('cookieModalOverlay');
+        if (overlay) {
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    };
+
+    window.saveCookieSettings = function() {
+        const analyticsCheck = document.getElementById('cookieAnalytics');
+        const marketingCheck = document.getElementById('cookieMarketing');
+
+        const consent = {
+            necessary: true,
+            analytics: analyticsCheck ? analyticsCheck.checked : false,
+            marketing: marketingCheck ? marketingCheck.checked : false,
+            timestamp: new Date().toISOString(),
+            source: 'settings_custom'
+        };
+
+        localStorage.setItem('elabore_cookie_consent', JSON.stringify(consent));
+        document.getElementById('cookieBanner').classList.remove('active');
+        closeCookieSettings();
+
+        window.dispatchEvent(new CustomEvent('cookieConsentUpdated', { detail: consent }));
+    };
+
+    // Fechar modal de cookies ao clicar fora
+    document.addEventListener('click', function(e) {
+        const overlay = document.getElementById('cookieModalOverlay');
+        if (overlay && e.target === overlay) {
+            closeCookieSettings();
+        }
+    });
+
+    // Fechar modal de cookies com ESC
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            closeCookieSettings();
+        }
+    });
+
+    // ========================================
+    // FUNCAO PARA VERIFICAR CONSENTIMENTO DE COOKIES
+    // ========================================
+
+    window.hasCookieConsent = function(category) {
+        const saved = localStorage.getItem('elabore_cookie_consent');
+        if (!saved) return false;
+        const consent = JSON.parse(saved);
+        return consent[category] === true;
+    };
+
+    // Inicializar cookie banner no DOM ready
+    initCookieBanner();
+
 })();

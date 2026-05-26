@@ -5,24 +5,86 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Grupo Elabore - Estratégia · Marketing · Design · Performance</title>
     <meta name="description" content="Elabore estratégias que geram crescimento, autoridade e resultados. Marketing digital estratégico, tráfego pago, design e desenvolvimento web.">
-    
+
     <!-- Favicon Elabore -->
     <link rel="icon" type="image/png" href="img/logo_elabore_roxo.png">
-    
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <base target="_blank">
 <base target="_blank">
-<base target="_blank">
-<base target="_blank">
-<base target="_blank">
-<base target="_blank">
-<base target="_blank">
-<base target="_blank">
 </head>
 <body>
+    <!-- Cookie Banner LGPD -->
+    <div class="cookie-banner" id="cookieBanner">
+        <div class="cookie-content">
+            <div class="cookie-text">
+                <p><strong>Utilizamos cookies</strong> para melhorar sua experiência, personalizar conteúdo e analisar nosso tráfego. Ao continuar navegando, você concorda com nossa <a href="politica-de-privacidade.html" target="_self">Política de Privacidade</a> e <a href="termos-de-uso.html" target="_self">Termos de Uso</a>.</p>
+            </div>
+            <div class="cookie-actions">
+                <button class="cookie-btn cookie-btn-accept" onclick="acceptCookies()">Aceitar todos</button>
+                <button class="cookie-btn cookie-btn-reject" onclick="rejectCookies()">Recusar opcionais</button>
+                <button class="cookie-btn cookie-btn-config" onclick="openCookieSettings()">Configurar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cookie Settings Modal -->
+    <div class="cookie-modal-overlay" id="cookieModalOverlay">
+        <div class="cookie-modal">
+            <button class="cookie-modal-close" onclick="closeCookieSettings()" aria-label="Fechar">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </button>
+            <div class="cookie-modal-header">
+                <h3>Configurações de Cookies</h3>
+                <p>Escolha quais categorias de cookies você deseja permitir.</p>
+            </div>
+            <div class="cookie-categories">
+                <div class="cookie-category">
+                    <div class="cookie-category-header">
+                        <div>
+                            <h4>Cookies Necessários</h4>
+                            <p>Essenciais para o funcionamento do site. Não podem ser desativados.</p>
+                        </div>
+                        <label class="cookie-toggle">
+                            <input type="checkbox" checked disabled>
+                            <span class="cookie-toggle-slider"></span>
+                        </label>
+                    </div>
+                </div>
+                <div class="cookie-category">
+                    <div class="cookie-category-header">
+                        <div>
+                            <h4>Cookies Analíticos</h4>
+                            <p>Ajudam a entender como os visitantes interagem com o site (Google Analytics).</p>
+                        </div>
+                        <label class="cookie-toggle">
+                            <input type="checkbox" id="cookieAnalytics" checked>
+                            <span class="cookie-toggle-slider"></span>
+                        </label>
+                    </div>
+                </div>
+                <div class="cookie-category">
+                    <div class="cookie-category-header">
+                        <div>
+                            <h4>Cookies de Marketing</h4>
+                            <p>Utilizados para entregar anúncios relevantes (Meta Pixel, Google Ads).</p>
+                        </div>
+                        <label class="cookie-toggle">
+                            <input type="checkbox" id="cookieMarketing" checked>
+                            <span class="cookie-toggle-slider"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="cookie-modal-actions">
+                <button class="btn btn-primary btn-full" onclick="saveCookieSettings()">Salvar preferências</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Navigation -->
     <nav class="navbar" id="navbar">
         <div class="nav-container">
@@ -154,6 +216,20 @@
                             <option>Turismo</option>
                             <option>Outro</option>
                         </select>
+                    </div>
+                    <div class="form-field form-field--full form-consent">
+                        <label class="consent-checkbox">
+                            <input type="checkbox" name="consentimento" required>
+                            <span class="checkmark"></span>
+                            <span class="consent-text">Li e concordo com a <a href="politica-de-privacidade.html" target="_self">Política de Privacidade</a> e autorizo o uso dos meus dados para fins de contato comercial e envio de comunicações da Grupo Elabore.</span>
+                        </label>
+                    </div>
+                    <div class="form-field form-field--full form-consent-sensitive">
+                        <label class="consent-checkbox">
+                            <input type="checkbox" name="consentimento_dados_sensiveis" required>
+                            <span class="checkmark"></span>
+                            <span class="consent-text">Autorizo o tratamento dos meus dados financeiros (faturamento) conforme a <a href="politica-de-privacidade.html" target="_self">Política de Privacidade</a>, para fins de análise estratégica e adequação de propostas comerciais.</span>
+                        </label>
                     </div>
                     <div class="form-field form-field--full">
                         <button type="submit" class="btn-lead">
@@ -744,32 +820,40 @@
                     </ul>
                 </div>
                 <div class="footer-links">
-                    <h4>Serviços</h4>
+                    <h4>Legal</h4>
                     <ul>
-                        <li><a href="#servicos">Marketing Digital</a></li>
-                        <li><a href="#servicos">Tráfego Pago</a></li>
-                        <li><a href="#servicos">Design e Conteúdo</a></li>
-                        <li><a href="#servicos">Desenvolvimento Web</a></li>
-                        <li><a href="#servicos">Automação</a></li>
+                        <li><a href="politica-de-privacidade.html" target="_self">Política de Privacidade</a></li>
+                        <li><a href="termos-de-uso.html" target="_self">Termos de Uso</a></li>
+                        <li><a href="lgpd.html" target="_self">LGPD - Seus Direitos</a></li>
                     </ul>
                 </div>
                 <div class="footer-contact">
                     <h4>Contato</h4>
+                    <a href="mailto:driveelabore@gmail.com" class="footer-email">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                        driveelabore@gmail.com
+                    </a>
                     <a href="https://wa.me/5522988730115" target="_blank" class="footer-cta">
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
                         (22) 98873-0115
                     </a>
+                    <p class="footer-address">Polo Tecnológico de Saquarema, RJ</p>
                     <p class="footer-hours">Atendimento: Seg - Sex, 8h às 18h</p>
                 </div>
             </div>
             <div class="footer-bottom">
                 <p>© 2026 Grupo Elabore. Todos os direitos reservados.</p>
-                <p class="footer-legal">CNPJ: 00.000.000/0001-00 · Cuiabá, MT</p>
+                <p class="footer-legal">CNPJ: 20.993.452/0001-29 · Polo Tecnológico de Saquarema, RJ</p>
+                <p class="footer-legal-links">
+                    <a href="politica-de-privacidade.html" target="_self">Política de Privacidade</a> · 
+                    <a href="termos-de-uso.html" target="_self">Termos de Uso</a> · 
+                    <a href="lgpd.html" target="_self">LGPD</a>
+                </p>
             </div>
         </div>
     </footer>
 
-    <!-- Contact Modal --><!-- Contact Modal -->
+    <!-- Contact Modal -->
     <div class="modal-overlay" id="modalOverlay">
         <div class="modal">
             <button class="modal-close" onclick="closeModal()" aria-label="Fechar">
@@ -806,6 +890,20 @@
                         <option value="acima-500k">Acima de R$ 500.000</option>
                     </select>
                 </div>
+                <div class="form-group form-consent-modal">
+                    <label class="consent-checkbox">
+                        <input type="checkbox" name="consentimento_modal" required>
+                        <span class="checkmark"></span>
+                        <span class="consent-text">Li e concordo com a <a href="politica-de-privacidade.html" target="_self">Política de Privacidade</a> e autorizo o uso dos meus dados para fins de contato comercial.</span>
+                    </label>
+                </div>
+                <div class="form-group form-consent-modal">
+                    <label class="consent-checkbox">
+                        <input type="checkbox" name="consentimento_dados_sensiveis_modal" required>
+                        <span class="checkmark"></span>
+                        <span class="consent-text">Autorizo o tratamento dos meus dados financeiros conforme a <a href="politica-de-privacidade.html" target="_self">Política de Privacidade</a>.</span>
+                    </label>
+                </div>
                 <button type="submit" class="btn btn-primary btn-full">
                     <span>Solicitar Diagnóstico</span>
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
@@ -815,6 +913,6 @@
     </div>
 
     <script src="script.js"></script>
-    
+
 </body>
 </html>
