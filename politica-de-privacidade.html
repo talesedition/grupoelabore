@@ -3,6 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <meta http-equiv="Strict-Transport-Security" content="max-age=31536000; includeSubDomains; preload">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <title>Política de Privacidade - Grupo Elabore</title>
     <meta name="description" content="Política de Privacidade da Grupo Elabore. Conheça como coletamos, usamos e protegemos seus dados pessoais.">
     <meta name="robots" content="index, follow">
@@ -150,8 +154,12 @@
         }
     </style>
 <base target="_blank">
+<base target="_blank">
 </head>
 <body>
+    <!-- Forçar HTTPS -->
+    <script>(function(){if(location.protocol==='http:'&&location.hostname!=='localhost'&&!location.hostname.startsWith('127.')){location.href='https://'+location.host+location.pathname+location.search+location.hash;}})();</script>
+
     <!-- Navigation -->
     <nav class="navbar scrolled" id="navbar">
         <div class="nav-container">

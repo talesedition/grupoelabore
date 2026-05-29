@@ -7,6 +7,10 @@
 
 (function() {
     'use strict';
+    // Forçar HTTPS
+    if (window.location.protocol === 'http:' && window.location.hostname !== 'localhost' && !window.location.hostname.startsWith('127.')) {
+        window.location.href = 'https://' + window.location.host + window.location.pathname + window.location.search + window.location.hash;
+    }
 
     // ========================================
     // CONFIGURAÇÃO GOOGLE SHEETS
